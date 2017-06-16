@@ -80,7 +80,7 @@ class Crawler(object):
              self.getComment(self.requestUrl,off)
 
 def main():
-    c = Crawler(66843)
+    c = Crawler(66842)
     c.start()
 
 if __name__ == '__main__':

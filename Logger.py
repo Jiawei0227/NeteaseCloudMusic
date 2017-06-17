@@ -48,7 +48,7 @@ class Log(object):
 
     def error(self,message):
         #message = self.getLogMessage("error",message)
-        self.__loggers[logging.ERROR].error(message)
+        self.__loggers[logging.ERROR].error(message,exc_info=True)
 
     def warning(self,message):
         #message = self.getLogMessage("warning",message)

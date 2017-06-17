@@ -11,7 +11,7 @@ logger = Logger.Log()
 
 class Crawler(object):
 
-    def __init__(self,id):
+    def __init__(self,id,taskSchedule):
         modulus = '00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7b725152b3ab17a876aea8a5aa76d2e417629ec4ee341f56135fccf695280104e0312ecbda92557c93870114af6c9d05c4f7f0c3685b7a46bee255932575cce10b424d813cfe4875d3e82047b97ddef52741d546b8e289dc6935b3ece0462db0a22b8e7'
         self.nonce = '0CoJUm6Qyw8W8jud'
         pubKey = '010001'
@@ -20,6 +20,7 @@ class Crawler(object):
         self.mysql = DataBase.Mysql()
         self.musicId = id
         self.requestUrl = "http://music.163.com/weapi/v1/resource/comments/R_SO_4_%d/"%int(id)
+        self.taskSchedule = taskSchedule
 
     def getComment(self, requestUrl, offset):
         username = ""
@@ -43,6 +44,7 @@ class Crawler(object):
         res = res_data.read()
         jsonData = json.loads(res)
         self.databaseSave(jsonData)
+        self.taskSchedule.trigger(self.musicId,offset)
         return int(jsonData["total"])
 
     def databaseSave(self ,jsonData):
@@ -69,8 +71,6 @@ class Crawler(object):
             if self.mysql.insertData("user",userData) >= 0:
                 logger.info("User %s Saved."%userData["id"])
 
-    def start(self):
-        self.process(1)
 
     def process(self, offset):
         off = offset
@@ -78,6 +78,8 @@ class Crawler(object):
         while off<total:
              off += 10
              self.getComment(self.requestUrl,off)
+        self.taskSchedule.trigger(self.musicId,"-1")
+
 
 def main():
     c = Crawler(66842)

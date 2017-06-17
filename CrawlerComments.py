@@ -19,7 +19,7 @@ class Crawler(object):
         self.encSecKey = EncryptUtil.rsaEncrypt(self.secKey, pubKey, modulus)
         self.mysql = DataBase.Mysql()
         self.musicId = id
-        self.requestUrl = "http://music.163.com/weapi/v1/resource/comments/R_SO_4_%d/"%id
+        self.requestUrl = "http://music.163.com/weapi/v1/resource/comments/R_SO_4_%d/"%int(id)
 
     def getComment(self, requestUrl, offset):
         username = ""

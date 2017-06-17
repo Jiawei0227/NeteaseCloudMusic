@@ -51,10 +51,10 @@ class Mysql:
                  if "key 'PRIMARY'" in e.args[1]:
                      logger.warning("数据已存在，未插入数据")
                  else:
-                     logger.error("数据已存在，未插入数据",exc_info=True)
+                     logger.error("数据已存在，未插入数据"+my_dict)
                  return -1
          except MySQLdb.Error,e:
-             logger.error("数据库错误",exc_info=True)
+             logger.error("数据库错误")
              return -1
 
 if __name__=='__main__':

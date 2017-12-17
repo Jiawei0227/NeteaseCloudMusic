@@ -26,7 +26,7 @@ class Mysql:
                     )
             self.cur = self.db.cursor()
         except MySQLdb.Error,e:
-            logger.error("连接数据库错误",exc_info=True)
+            logger.error("连接数据库错误")
 
     #插入数据
     def insertData(self, table, my_dict):
@@ -51,7 +51,7 @@ class Mysql:
                  if "key 'PRIMARY'" in e.args[1]:
                      logger.warning("数据已存在，未插入数据")
                  else:
-                     logger.error("数据已存在，未插入数据"+my_dict)
+                     logger.error("数据已存在，未插入数据"+str(my_dict))
                  return -1
          except MySQLdb.Error,e:
              logger.error("数据库错误")

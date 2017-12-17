@@ -22,11 +22,11 @@ class ProcessController(object):
                 continue
             for song in album["songs"]:
                 if song["id"] == musicId:
-                    if offset == -1:
-                        song["isCrawler"] == 1
+                    if offset == "-1":
+                        song["isCrawler"] = 1
                         for song in album["songs"]:
                             isCrawler = 1
-                            if song["isCrawler" == 0]:
+                            if song["isCrawler"] == 0:
                                 isCrawler = 0
                                 break
                         album["isCrawler"] = isCrawler

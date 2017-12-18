@@ -13,6 +13,6 @@
 
 1. [x] Crawler comments from 163 music
 2. [x] Save Data somewhere
-3. [ ] Use solr or lucene to build search engine
+3. [x] Use solr or lucene to build search engine
 4. [ ] Make up all the code
 5. [ ] Other things
